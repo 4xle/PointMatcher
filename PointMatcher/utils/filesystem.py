@@ -22,7 +22,7 @@ def string_path(string):
 
 
 def scan_all_images(root_dir):
-    extensions = ['.jpg', '.JPG']
+    extensions = ['.jpg', '.JPG','.png']
     image_paths = []
     for root, dirs, files in os.walk(root_dir):
         for file in files:
@@ -31,4 +31,5 @@ def scan_all_images(root_dir):
                 path = osp.abspath(relativePath)
                 image_paths.append(path)
     natural_sort(image_paths, key=lambda x: x.lower())
+    # print(image_paths)
     return image_paths
