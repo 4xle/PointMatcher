@@ -11,3 +11,4 @@ from actions.autosaving import AutoSavingAction
 from actions.editkeypointmode import EditKeypointModeAction
 from actions.editmatchmode import EditMatchModeAction
 from actions.showinfo import ShowInfoAction
+from actions.autokeypoint import AutoKeypointAction

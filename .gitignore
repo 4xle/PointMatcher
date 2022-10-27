@@ -7,3 +7,11 @@ venv
 *.pyc
 
 docs/_build
+
+dataset/
+
+anno_test/views/
+
+*.pkl
+
+anno_test/

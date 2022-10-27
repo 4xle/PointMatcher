@@ -231,16 +231,29 @@ class Canvas(QWidget):
                 return x, y - self.img_i_h
         return None
 
+    def getImageI(self):
+        return self.img[:self.img_i_h, :self.img_i_w, :]
+
+
+    def getImageJ(self):
+        return self.img[self.img_i_h:, :self.img_j_w, :]
+
+
     def updatePixmap(self):
+        print(self.p.matching.get_filename(self.p.matching.get_view_id_j()))
         img_i = cv2.imread(osp.join(self.p.imageDir, self.p.matching.get_filename(self.p.matching.get_view_id_i())))
         img_j = cv2.imread(osp.join(self.p.imageDir, self.p.matching.get_filename(self.p.matching.get_view_id_j())))
+        self.img_i = img_i
+        self.img_j = img_j
+
         self.img_i_h, self.img_i_w, _ = img_i.shape
         self.img_j_h, self.img_j_w, _ = img_j.shape
         img_h = self.img_i_h + self.img_j_h
         img_w = max(self.img_i_w, self.img_j_w)
         img = np.zeros(shape=(img_h, img_w, 3), dtype=np.uint8)
         img[:self.img_i_h, :self.img_i_w, :] = img_i
-        img[self.img_i_h:, :self.img_j_w, :] = img_j
+        img[self.img_i_h:, :self.img_j_w, :] = img_j # img_i_h is the starting point for image j
+        self.img = img
         qimg = QImage(img.flatten(), img_w, img_h, QImage.Format_BGR888)
         self.pixmap = QPixmap.fromImage(qimg)
         self.mp.draw_offset_i_x = 0
