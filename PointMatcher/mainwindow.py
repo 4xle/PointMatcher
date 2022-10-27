@@ -70,8 +70,8 @@ class MainWindow(QMainWindow, WindowMixin):
             editMatchMode=EditMatchModeAction(self),
             autoSaving=AutoSavingAction(self),
             showInfo=ShowInfoAction(self),
-            autoKeypoint=AutoKeypointAction(self)
-            # autoMatch=AutoMatchAction(self)
+            autoKeypoint=AutoKeypointAction(self),
+            autoMatch=AutoMatchAction(self)
             )
 
         self.menus = struct(
@@ -103,7 +103,7 @@ class MainWindow(QMainWindow, WindowMixin):
             self.tools,
             (a.openImageDir, a.openAnnotDir, a.save, a.export,
              None, a.openNextView, a.openPrevView,
-             None, za.zoomIn, za.zoom, za.zoomOut, za.zoomFitWindow, za.zoomFitWidth, None,a.autoKeypoint))
+             None, za.zoomIn, za.zoom, za.zoomOut, za.zoomFitWindow, za.zoomFitWidth, None,a.autoKeypoint,a.autoMatch))
 
         self.statusBar().showMessage('{} started.'.format(__appname__))
         self.statusBar().show()

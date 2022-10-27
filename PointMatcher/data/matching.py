@@ -229,12 +229,26 @@ class Matching:
         gid_j = self._view_j['keypoints'][kidx_j]['group_id']
         vid_i = self.get_view_id_i()
         vid_j = self.get_view_id_j()
+
+
+
+        # print(f"{self._view_i['keypoints'][kidx_i]=}")
+        # print(f"{self._view_j['keypoints'][kidx_j]=}")
+
+        # print(f"{gid_i=}")
+        # print(f"{gid_j=}")
+
+
         if vid_i == vid_j:
             raise RuntimeWarning('same views')
         if len(self._groups['groups']) == 0:
             new_group_id = 0
         else:
             new_group_id = self._groups['groups'][-1]['id'] + 1
+
+
+        # print(f"{self._groups['groups']=}")
+
         if (gid_i is None) and (gid_j is None):
             self._groups['groups'].append({
                 'id': new_group_id,
@@ -254,8 +268,8 @@ class Matching:
             return
         if (gid_i is not None) and (gid_j is None):
             gks_i = self._groups['groups'][self._group_id_to_idx[gid_i]]['keypoints']
-            if vid_j in [gk[0] for gk in gks_i]:
-                raise RuntimeWarning('conflict')
+            # if vid_j in [gk[0] for gk in gks_i]:
+                # raise RuntimeWarning('conflict')
             self._groups['groups'][self._group_id_to_idx[gid_i]]['keypoints'].append([vid_j, kid_j])
             self._view_j['keypoints'][kidx_j]['group_id'] = gid_i
             self._matches[gid_i][1] = kid_j
@@ -270,8 +284,8 @@ class Matching:
             return
         if (gid_i is None) and (gid_j is not None):
             gks_j = self._groups['groups'][self._group_id_to_idx[gid_j]]['keypoints']
-            if vid_i in [gk[0] for gk in gks_j]:
-                raise RuntimeWarning('conflict')
+            # if vid_i in [gk[0] for gk in gks_j]:
+                # raise RuntimeWarning('conflict')
             self._groups['groups'][self._group_id_to_idx[gid_j]]['keypoints'].append([vid_i, kid_i])
             self._view_i['keypoints'][kidx_i]['group_id'] = gid_j
             self._matches[gid_j][0] = kid_i
@@ -289,18 +303,28 @@ class Matching:
             gks_j = self._groups['groups'][self._group_id_to_idx[gid_j]]['keypoints']
             gks = gks_i + gks_j
             all_vids = [gk[0] for gk in gks]
-            if any([count > 1 for item, count in Counter(all_vids).items()]):
-                raise RuntimeWarning('conflict')
-            del self._groups['groups'][self._group_id_to_idx[gid_i]]
-            self.update_group_id_to_idx()
-            del self._groups['groups'][self._group_id_to_idx[gid_j]]
+            # print(gks_i)
+            # print(gks_j)
+            # print(all_vids)
+
+            # if any([count > 1 for item, count in Counter(all_vids).items()]):
+                # raise RuntimeWarning('conflict')
+            try:
+                del self._groups['groups'][self._group_id_to_idx[gid_i]]
+                self.update_group_id_to_idx()
+                del self._groups['groups'][self._group_id_to_idx[gid_j]]
+            except KeyError:
+                pass
             self.update_group_id_to_idx()
             self._groups['groups'].append({
                 'id': new_group_id,
                 'keypoints': gks})
             self.update_group_id_to_idx()
-            del self._matches[gid_i]
-            del self._matches[gid_j]
+            try:
+                del self._matches[gid_i]
+                del self._matches[gid_j]
+            except KeyError:
+                pass
             self._view_i['keypoints'][kidx_i]['group_id'] = new_group_id
             self._view_j['keypoints'][kidx_j]['group_id'] = new_group_id
             self._matches[new_group_id] = [kid_i, kid_j]

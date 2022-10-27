@@ -112,6 +112,7 @@ class Canvas(QWidget):
 
     def mousePressEvent(self, ev):
         pos = self.transformPos(ev.pos())
+        # print(ev.pos(),pos)
         posInViewI = self.GetPosInViewI(pos.x(), pos.y())
         posInViewJ = self.GetPosInViewJ(pos.x(), pos.y())
 
@@ -240,7 +241,7 @@ class Canvas(QWidget):
 
 
     def updatePixmap(self):
-        print(self.p.matching.get_filename(self.p.matching.get_view_id_j()))
+        # print(self.p.matching.get_filename(self.p.matching.get_view_id_j()))
         img_i = cv2.imread(osp.join(self.p.imageDir, self.p.matching.get_filename(self.p.matching.get_view_id_i())))
         img_j = cv2.imread(osp.join(self.p.imageDir, self.p.matching.get_filename(self.p.matching.get_view_id_j())))
         self.img_i = img_i

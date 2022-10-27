@@ -12,3 +12,4 @@ from actions.editkeypointmode import EditKeypointModeAction
 from actions.editmatchmode import EditMatchModeAction
 from actions.showinfo import ShowInfoAction
 from actions.autokeypoint import AutoKeypointAction
+from actions.automatch import AutoMatchAction
