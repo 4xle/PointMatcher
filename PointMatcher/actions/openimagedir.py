@@ -2,8 +2,8 @@ import os.path as osp
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 from PyQt5.QtWidgets import QFileDialog
-from PointMatcher import __appname__
-from PointMatcher.utils.filesystem import icon_path
+from initVars import  __appname__
+from utils.filesystem import icon_path
 
 
 QFD = QFileDialog

@@ -5,7 +5,7 @@ import cv2
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PointMatcher.data.painter import MatchingPainter
+from data.painter import MatchingPainter
 
 
 CURSOR_DEFAULT = Qt.ArrowCursor

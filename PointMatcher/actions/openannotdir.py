@@ -3,9 +3,9 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QMessageBox
-from PointMatcher import __appname__
-from PointMatcher.data import Matching
-from PointMatcher.utils.filesystem import icon_path
+from initVars import  __appname__
+from data import Matching
+from utils.filesystem import icon_path
 
 
 QFD = QFileDialog

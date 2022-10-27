@@ -2,7 +2,7 @@ import os.path as osp
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QAction
 from PyQt5.QtWidgets import QFileDialog
-from PointMatcher.utils.filesystem import icon_path
+from utils.filesystem import icon_path
 
 
 class ExportAction(QAction):

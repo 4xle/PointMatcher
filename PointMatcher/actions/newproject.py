@@ -11,7 +11,7 @@ from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtWidgets import QPushButton
-from PointMatcher.utils.filesystem import icon_path, scan_all_images
+from utils.filesystem import icon_path, scan_all_images
 
 
 QDBB = QDialogButtonBox

@@ -20,8 +20,8 @@ required_packages.append('PointMatcher')
 
 
 required_dependencies = [
-    'numpy==1.19.3',
-    'opencv-python',
+    # 'numpy==1.19.3',
+    # 'opencv-python',
     'pyqt5'
 ]
 

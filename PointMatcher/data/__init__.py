@@ -1,1 +1,1 @@
-from PointMatcher.data.matching import Matching
+from data.matching import Matching

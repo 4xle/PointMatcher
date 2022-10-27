@@ -1,13 +1,13 @@
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PointMatcher.__init__ import __appname__
-from PointMatcher.widgets import *
-from PointMatcher.actions import *
-from PointMatcher.data.matching import Matching
-from PointMatcher.settings import Settings
-from PointMatcher.utils.struct import struct
-from PointMatcher.utils.qt import addActions
+from __init__ import __appname__
+from widgets import *
+from actions import *
+from data.matching import Matching
+from settings import Settings
+from utils.struct import struct
+from utils.qt import addActions
 
 
 class WindowMixin(object):

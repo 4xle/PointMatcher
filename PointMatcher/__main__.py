@@ -5,9 +5,9 @@ import argparse
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
-from PointMatcher.__init__ import __appname__
-from PointMatcher.mainwindow import MainWindow
-from PointMatcher.utils.filesystem import icon_path
+from __init__ import __appname__
+from mainwindow import MainWindow
+from utils.filesystem import icon_path
 
 
 def main():
