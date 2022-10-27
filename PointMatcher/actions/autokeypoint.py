@@ -26,9 +26,15 @@ class AutoKeypointAction(QAction):
         self.triggered.connect(self.automaticKeypoint)
         self.setEnabled(True)
 
-    def save_keypoints_and_descriptors(self, kpdata, desdata, basePath,overwrite=False):
+
+    def gen_kp_des_paths(self, basePath):
         kp_pkl_path = basePath.with_stem(basePath.stem + "_kp").with_suffix(".pkl")
         des_pkl_path = kp_pkl_path.with_stem(basePath.stem + "_des")
+        return kp_pkl_path, des_pkl_path
+
+
+    def save_keypoints_and_descriptors(self, kpdata, desdata, basePath,overwrite=False):
+        kp_pkl_path, des_pkl_path = self.gen_kp_des_paths(basePath)
 
         with kp_pkl_path.open("wb") as kpfile:
             pickle.dump(kpdata,kpfile)
@@ -42,8 +48,8 @@ class AutoKeypointAction(QAction):
         view_id_j = self.p.matching.get_view_id_j()
 
         # get paths to files to write
-        i_path = Path(self.p.matching.get_filename(self.p.matching.get_view_id_i()))
-        j_path = Path(self.p.matching.get_filename(self.p.matching.get_view_id_j()))
+        i_path = Path(self.p.imageDir) / self.p.matching.get_filename(self.p.matching.get_view_id_i())
+        j_path = Path(self.p.imageDir) / self.p.matching.get_filename(self.p.matching.get_view_id_j())
 
         # create keypoint detector
         sift = cv.SIFT_create()
@@ -51,10 +57,10 @@ class AutoKeypointAction(QAction):
         # detect and compute keypoints
         # TODO: if file already exists, check for overwrite?
         kp1,des1 = sift.detectAndCompute(self.p.canvas.img_i,None)
-        save_keypoints_and_descriptors(kp1,des1,i_path)
+        self.save_keypoints_and_descriptors(kp1,des1,i_path)
 
         kp2,des2 = sift.detectAndCompute(self.p.canvas.img_j,None)
-        save_keypoints_and_descriptors(kp2,des2,j_path)
+        self.save_keypoints_and_descriptors(kp2,des2,j_path)
 
         # kp2,des2 = sift.detectAndCompute(self.p.canvas.img_j)
 
