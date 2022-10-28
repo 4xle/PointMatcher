@@ -50,6 +50,7 @@ class AutoMatchAction(QAction):
             for pt in tqdm(ikp,desc="Adding top image keypoint dots..."):
                 ix, iy = pt.pt
                 self.p.matching.append_keypoint_in_view_i(ix,iy)
+            self.p.actions.autoKeypointikp = ikp
             self.p.canvas.update()
 
 
@@ -58,6 +59,7 @@ class AutoMatchAction(QAction):
                 jx, jy = pt.pt
                 # jy += self.p.canvas.img_i_h
                 self.p.matching.append_keypoint_in_view_j(jx,jy)
+            self.p.actions.autoKeypoint.jkp = jkp
             self.p.canvas.update()
 
 

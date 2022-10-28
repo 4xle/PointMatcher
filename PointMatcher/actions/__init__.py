@@ -13,3 +13,6 @@ from actions.editmatchmode import EditMatchModeAction
 from actions.showinfo import ShowInfoAction
 from actions.autokeypoint import AutoKeypointAction
 from actions.automatch import AutoMatchAction
+from actions.hideunmatchedpointsaction import HideUnmatchedPointsAction
+from actions.groupmatchesbyorientation import GroupMatchesByOrientationAction
+from actions.clearalldata import ClearAllDataAction
