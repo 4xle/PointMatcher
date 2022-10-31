@@ -7,12 +7,32 @@ import cv2 as cv
 import copyreg
 import pickle
 from tqdm import tqdm
+import numpy as np
 
 def _pickle_keypoints(point):
     return cv.KeyPoint, (*point.pt, point.size, point.angle,
                           point.response, point.octave, point.class_id)
 
 copyreg.pickle(cv.KeyPoint().__class__, _pickle_keypoints)
+
+
+class RootSIFT:
+    def __init__(self):
+        # initialize the SIFT feature extractor
+        self.extractor = cv.SIFT_create()
+    def detectAndCompute(self, image, kps, eps=1e-7):
+        # compute SIFT descriptors
+        (kps, descs) = self.extractor.detectAndCompute(image,None)
+        # if there are no keypoints or descriptors, return an empty tuple
+        if len(kps) == 0:
+            return ([], None)
+        # apply the Hellinger kernel by first L1-normalizing and taking the
+        # square-root
+        descs /= (descs.sum(axis=1, keepdims=True) + eps)
+        descs = np.sqrt(descs)
+        #descs /= (np.linalg.norm(descs, axis=1, ord=2) + eps)
+        # return a tuple of the keypoints and descriptors
+        return (kps, descs)
 
 
 class AutoKeypointAction(QAction):
@@ -58,7 +78,8 @@ class AutoKeypointAction(QAction):
         j_path = Path(self.p.imageDir) / self.p.matching.get_filename(self.p.matching.get_view_id_j())
 
         # create keypoint detector
-        sift = cv.SIFT_create()
+        # sift = cv.SIFT_create()
+        sift = RootSIFT()
 
         # detect and compute keypoints
         # TODO: if file already exists, check for overwrite?

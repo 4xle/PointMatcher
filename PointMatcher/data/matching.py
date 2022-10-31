@@ -20,6 +20,7 @@ class Matching:
         self._view_i = None
         self._view_j = None
         self._matches = None
+        self._matchorigroup = None
 
         self.highlighted_id_i = None
         self.highlighted_id_j = None
@@ -69,6 +70,7 @@ class Matching:
             self._group_id_to_idx[group['id']] = idx
 
     def initialize_matchcounter(self):
+        self._matchorigroup = {}
         self._matchcounter = {}
         for group in self._groups['groups']:
             for i in range(0, len(group['keypoints'])):

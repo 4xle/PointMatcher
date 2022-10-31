@@ -34,6 +34,7 @@ class MatchingPainter:
         keypoints_i = matching.get_keypoints_i()
         keypoints_j = matching.get_keypoints_j()
         matches = matching.get_matches()
+        matchOriGroup = matching._matchorigroup
 
         pen = QPen(self.keypoint_fill_color)
         pen.setWidth(max(1, int(round(2.0 / scale))))
@@ -84,7 +85,10 @@ class MatchingPainter:
             match_path = QPainterPath()
             match_path.moveTo(pos_i[0] + self.draw_offset_i_x, pos_i[1] + self.draw_offset_i_y)
             match_path.lineTo(pos_j[0] + self.draw_offset_j_x, pos_j[1] + self.draw_offset_j_y)
-            color = self.match_line_colors[idx % len(self.match_line_colors)]
+            if len(matchOriGroup) == 0:
+                color = self.match_line_colors[idx % len(self.match_line_colors)]
+            else:
+                color = self.match_line_colors[matchOriGroup[key]]
             if kid_i == matching.selected_id_i or kid_j == matching.selected_id_j:
                 pen = QPen(QColor(color[0], color[1], color[2], self.match_selected_line_alpha))
                 pen.setWidth(self.match_highlighted_line_width / scale)
