@@ -87,6 +87,9 @@ class ClearAllDataAction(QAction):
         print(self.p.matching.get_keypoints_i())
         print(self.p.matching.get_keypoints_j())
 
+        self.p.canvas.update()
+        # self.p.matching.reset_all()
+
 
 
             

@@ -74,7 +74,9 @@ class MainWindow(QMainWindow, WindowMixin):
             autoMatch=AutoMatchAction(self),
             hideUnmatched=HideUnmatchedPointsAction(self),
             groupMatchesByOrientation=GroupMatchesByOrientationAction(self),
-            clearAllData=ClearAllDataAction(self)
+            clearAllData=ClearAllDataAction(self),
+            computeManualPointHomography = ComputeAndShowManualHomographyAction(self),
+            computeRootSIFTUSACHomography = ComputeAndShowRootSIFTUSACHomographyAction(self)
             )
 
         self.menus = struct(
@@ -106,7 +108,7 @@ class MainWindow(QMainWindow, WindowMixin):
             self.tools,
             (a.openImageDir, a.openAnnotDir, a.save, a.export,
              None, a.openNextView, a.openPrevView,
-             None, za.zoomIn, za.zoom, za.zoomOut, za.zoomFitWindow, za.zoomFitWidth, None,a.autoKeypoint,a.autoMatch,a.hideUnmatched,a.groupMatchesByOrientation,a.clearAllData))
+             None, za.zoomIn, za.zoom, za.zoomOut, za.zoomFitWindow, za.zoomFitWidth, None,a.autoKeypoint,a.autoMatch,a.hideUnmatched,a.groupMatchesByOrientation,a.clearAllData,a.computeManualPointHomography,a.computeRootSIFTUSACHomography))
 
         self.statusBar().showMessage('{} started.'.format(__appname__))
         self.statusBar().show()

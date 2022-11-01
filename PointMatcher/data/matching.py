@@ -39,6 +39,33 @@ class Matching:
         self.initialize_matchcounter()
         self.set_view(self.get_list_of_view_id()[0], self.get_list_of_view_id()[1])
 
+    def reset_all(self):
+        self._groups = None
+        self._group_id_to_idx = None
+        self._viewlist = None
+        self._matchcounter = None
+        self._view_i = {}
+        self._view_j = {}
+        self._matches = {}
+        self._matchorigroup = {}
+
+        self.highlighted_id_i = None
+        self.highlighted_id_j = None
+        self.selected_id_i = None
+        self.selected_id_j = None
+
+        self._update_callback = None
+
+        self._dirty = False
+        self._dirty_groups = False
+        self._dirty_views = {}
+        self._dirty_callback = None
+
+        self.load_groups()
+        self.load_viewlist()
+        self.initialize_matchcounter()
+        self.set_view(self.get_list_of_view_id()[0], self.get_list_of_view_id()[1])
+
     def load_groups(self):
         with open(self.get_groups_path(), 'r') as f:
             self._groups = json.load(f)

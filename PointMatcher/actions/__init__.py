@@ -16,3 +16,4 @@ from actions.automatch import AutoMatchAction
 from actions.hideunmatchedpointsaction import HideUnmatchedPointsAction
 from actions.groupmatchesbyorientation import GroupMatchesByOrientationAction
 from actions.clearalldata import ClearAllDataAction
+from actions.computehomography import ComputeAndShowManualHomographyAction,ComputeAndShowRootSIFTUSACHomographyAction

@@ -71,7 +71,7 @@ class AutoMatchAction(QAction):
         good = []
         pts1 = []
         pts2 = []
-        matchesMask = [[0, 0] for i in range(len(matches))]
+        # matchesMask = [[0, 0] for i in range(len(matches))]
 
         for i, (m,n) in tqdm(enumerate(matches),desc="filtering good matches..."):
             if m.distance < 0.75*n.distance:
@@ -93,7 +93,20 @@ class AutoMatchAction(QAction):
         pts1 = np.int32(pts1)
         pts2 = np.int32(pts2)
 
-        F,mask = cv.findFundamentalMat(pts1,pts2,cv.USAC_DEFAULT)
+        # # F,mask = cv.findFundamentalMat(pts1,pts2,cv.USAC_DEFAULT)
+        M, mask = cv.findHomography(pts1,pts2, cv.USAC_DEFAULT,5.0)
+        # M, mask = cv.findHomography(pts1,pts2, None)
+        # # print(M)
+        # matchesMask = mask.ravel().tolist()
+
+
+        # h,w,d = self.p.canvas.img_i.shape
+        # pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
+        # dst = cv.perspectiveTransform(pts,M)
+
+        # debugImage = cv.polylines(self.p.canvas.img_j, [np.int32(dst)],True,255,3,cv.LINE_AA)
+        # cv.imshow("test", debugImage)
+        # cv.waitKey(1)
         # print(F)
         # print(mask)
 
@@ -107,7 +120,7 @@ class AutoMatchAction(QAction):
         # pts2 = pts2[mask.ravel() == 1]
 
         for a,b in zip(pts1,pts2):
-            print(a,b)
+            # print(a,b)
             ix,iy = a
             jx,jy = b
 
